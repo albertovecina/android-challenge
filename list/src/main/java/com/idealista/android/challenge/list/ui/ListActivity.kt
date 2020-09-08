@@ -16,21 +16,21 @@ class ListActivity : AppCompatActivity(), ListView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
-        ListAssembler.presenter = ListPresenter(this)
+        ListAssembler.listPresenter = ListPresenter(this)
         listAdapter = ListAdapter()
         findViewById<RecyclerView>(R.id.recycler).apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(this@ListActivity)
             adapter = listAdapter
         }
-        ListAssembler.presenter.onListNeeded()
+        ListAssembler.listPresenter.onListNeeded()
     }
 
     override fun render(list: ListModel) {
         listAdapter.set(list)
         listAdapter.listener(object : ListAdapter.AdListener {
             override fun onAdClicked(ad: AdModel) {
-                ListAssembler.presenter.onAdClicked(ad)
+                ListAssembler.listPresenter.onAdClicked(ad)
             }
         })
     }
