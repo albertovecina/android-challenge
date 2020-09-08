@@ -18,7 +18,7 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
     private var ads: List<AdModel> = emptyList()
     private lateinit var listener: AdListener
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder{
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.view_ad, parent, false)
         return ListViewHolder(view)
     }
@@ -26,8 +26,10 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
     override fun getItemCount(): Int = ads.size
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        with (ads[position]) {
-            if (thumbnail.isNotEmpty()) Picasso.with(holder.image.context).load(thumbnail).into(holder.image)
+        with(ads[position]) {
+            if (thumbnail.isNotEmpty()) Picasso.with(holder.image.context).load(thumbnail)
+                .into(holder.image)
+            holder.parent.setOnClickListener { listener.onAdClicked(this) }
             holder.title.text = title
             holder.price.text = price
         }

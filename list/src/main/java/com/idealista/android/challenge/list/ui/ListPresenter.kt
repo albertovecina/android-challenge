@@ -25,6 +25,8 @@ class ListPresenter(private val view: ListView) {
             }.run(CoreAssembler.executor)
     }
 
-    fun onAdClicked(ad: AdModel) {}
+    fun onAdClicked(ad: AdModel) {
+        view.navigateToAd()
+    }
 
 }

@@ -35,4 +35,8 @@ class ListActivity : AppCompatActivity(), ListView {
         })
     }
 
+    override fun navigateToAd() {
+        startActivity(Addressable.Activity.Ads.intentTo())
+    }
+
 }
