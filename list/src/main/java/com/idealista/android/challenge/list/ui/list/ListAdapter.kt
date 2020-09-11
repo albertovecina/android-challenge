@@ -1,4 +1,4 @@
-package com.idealista.android.challenge.list.ui
+package com.idealista.android.challenge.list.ui.list
 
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +20,9 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.view_ad, parent, false)
-        return ListViewHolder(view)
+        return ListViewHolder(
+            view
+        )
     }
 
     override fun getItemCount(): Int = ads.size

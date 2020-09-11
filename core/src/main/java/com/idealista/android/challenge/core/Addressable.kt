@@ -15,8 +15,11 @@ object Addressable {
         abstract val className: String
 
         object Ads : Activity() {
+
+            const val EXTRA_URL = "extra_url"
+
             override val className: String
-                get() = "$BASE_PACKAGE_NAME.list.ui.AdsActivity"
+                get() = "$BASE_PACKAGE_NAME.list.ui.ads.AdsActivity"
         }
     }
 }

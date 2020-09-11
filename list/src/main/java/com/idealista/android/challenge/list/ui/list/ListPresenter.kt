@@ -1,16 +1,15 @@
-package com.idealista.android.challenge.list.ui
+package com.idealista.android.challenge.list.ui.list
 
 import com.idealista.android.challenge.core.CoreAssembler
 import com.idealista.android.challenge.core.api.model.CommonError
 import com.idealista.android.challenge.core.wrench.usecase.UseCase
-import com.idealista.android.challenge.list.ListAssembler
-import com.idealista.android.challenge.list.domain.List
+import com.idealista.android.challenge.list.domain.AdList
 import com.idealista.android.challenge.list.domain.list
 
 class ListPresenter(private val view: ListView) {
 
     fun onListNeeded() {
-        UseCase<CommonError, List>()
+        UseCase<CommonError, AdList>()
             .bg(list(ListAssembler.listRepository))
             .map { it.toModel() }
             .ui {
@@ -18,15 +17,15 @@ class ListPresenter(private val view: ListView) {
                     {
 
                     },
-                    {
-                        view.render(it)
+                    { list ->
+                        view.render(list)
                     }
                 )
             }.run(CoreAssembler.executor)
     }
 
     fun onAdClicked(ad: AdModel) {
-        view.navigateToAd()
+        view.navigateToAd(ad.detailUrl)
     }
 
 }

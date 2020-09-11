@@ -1,25 +1,30 @@
-package com.idealista.android.challenge.list.ui
+package com.idealista.android.challenge.list.ui.list
 
 import com.idealista.android.challenge.core.CoreAssembler
 import com.idealista.android.challenge.core.R
 import com.idealista.android.challenge.core.model.Operation
 import com.idealista.android.challenge.core.model.Typology
 import com.idealista.android.challenge.core.model.string
-import com.idealista.android.challenge.list.domain.AdDetail
+import com.idealista.android.challenge.list.domain.Ad
 
-data class AdDetailModel(
+data class AdModel(
     val id: String,
     val thumbnail: String,
     val price: String,
-    val title: String
+    val title: String,
+    val detailUrl: String
 )
 
-fun AdDetail.toModel() =
-    AdDetailModel(
+fun Ad.toModel() =
+    AdModel(
         id,
-        "",
+        thumbnail,
         formatPrice(price),
-        formatTitle(typology, operation)
+        formatTitle(
+            typology,
+            operation
+        ),
+        detailUrl
     )
 
 private fun formatPrice(price: Double) = "$price €"
