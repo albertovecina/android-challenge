@@ -3,6 +3,7 @@ package com.idealista.android.challenge.list.ui.list
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +13,11 @@ import com.squareup.picasso.Picasso
 class ListAdapter : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
     interface AdListener {
+
         fun onAdClicked(ad: AdModel)
+
+        fun onAdFavouriteButtonClicked(adId: String, isFavourite: Boolean)
+
     }
 
     private var ads: List<AdModel> = emptyList()
@@ -34,6 +39,11 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
             holder.parent.setOnClickListener { listener.onAdClicked(this) }
             holder.title.text = title
             holder.price.text = price
+            holder.favourite.isChecked = isFavourite
+            holder.favourite.setOnCheckedChangeListener { _, isChecked ->
+                isFavourite = isChecked
+                listener.onAdFavouriteButtonClicked(id, isChecked)
+            }
         }
     }
 
@@ -50,6 +60,7 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
         var image: ImageView = view.findViewById(R.id.ivAd)
         var title: TextView = view.findViewById(R.id.tvTitle)
         var price: TextView = view.findViewById(R.id.tvPrice)
+        var favourite: CheckBox = view.findViewById(R.id.cvFavourite)
         var parent: View = view.findViewById(R.id.parent)
     }
 

@@ -6,5 +6,5 @@ data class ListModel(
     val ads: List<AdModel>
 )
 
-fun AdList.toModel(mapper: (String) -> Boolean) =
-    ListModel(ads.map { it.toModel(mapper(it.id)) })
+fun AdList.toModel(favouriteAdsMapper: (String) -> Boolean) =
+    ListModel(ads.map { it.toModel(favouriteAdsMapper(it.id)) })

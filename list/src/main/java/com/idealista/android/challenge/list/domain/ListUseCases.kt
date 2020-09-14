@@ -11,3 +11,6 @@ fun list(repository: ListRepository): () -> Either<CommonError, AdList> = {
 
 fun isFavouriteAd(repository: PreferencesRepository, adId: String): Boolean =
     repository.isFavouriteAd(adId)
+
+fun setFavouriteAd(repository: PreferencesRepository, adId: String, isFavourite: Boolean) =
+    repository.setFavouriteAd(adId, isFavourite)

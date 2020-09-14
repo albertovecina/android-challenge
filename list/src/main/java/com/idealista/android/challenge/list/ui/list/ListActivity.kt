@@ -34,6 +34,10 @@ class ListActivity : AppCompatActivity(),
             override fun onAdClicked(ad: AdModel) {
                 ListAssembler.presenter.onAdClicked(ad)
             }
+
+            override fun onAdFavouriteButtonClicked(adId: String, isFavourite: Boolean) {
+                ListAssembler.presenter.onAdFavouriteButtonClicked(adId, isFavourite)
+            }
         })
     }
 

@@ -6,6 +6,7 @@ import com.idealista.android.challenge.core.wrench.usecase.UseCase
 import com.idealista.android.challenge.list.domain.AdList
 import com.idealista.android.challenge.list.domain.isFavouriteAd
 import com.idealista.android.challenge.list.domain.list
+import com.idealista.android.challenge.list.domain.setFavouriteAd
 
 class ListPresenter(private val view: ListView) {
 
@@ -27,6 +28,10 @@ class ListPresenter(private val view: ListView) {
 
     fun onAdClicked(ad: AdModel) {
         view.navigateToAd(ad.detailUrl)
+    }
+
+    fun onAdFavouriteButtonClicked(adId: String, isFavourite: Boolean) {
+        setFavouriteAd(ListAssembler.preferencesRepository, adId, isFavourite)
     }
 
 }
