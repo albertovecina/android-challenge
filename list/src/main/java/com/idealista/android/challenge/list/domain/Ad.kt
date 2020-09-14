@@ -9,8 +9,8 @@ data class Ad(
     val thumbnail: String,
     val price: Double,
     val typology: Typology,
-    val detailUrl: String,
-    val operation: Operation
+    val operation: Operation,
+    val detailUrl: String
 )
 
 fun AdEntity.toDomain() =
@@ -19,5 +19,6 @@ fun AdEntity.toDomain() =
         multimedia?.images?.get(0)?.url ?: "",
         price ?: 0.0,
         Typology.from(propertyType ?: ""),
-        detailUrl ?: "",
-        Operation.from(operation ?: ""))
+        Operation.from(operation ?: ""),
+        detailUrl ?: ""
+    )
