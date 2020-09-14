@@ -12,10 +12,11 @@ data class AdModel(
     val thumbnail: String,
     val price: String,
     val title: String,
+    var isFavourite: Boolean,
     val detailUrl: String
 )
 
-fun Ad.toModel() =
+fun Ad.toModel(isFavourite: Boolean) =
     AdModel(
         id,
         thumbnail,
@@ -24,6 +25,7 @@ fun Ad.toModel() =
             typology,
             operation
         ),
+        isFavourite,
         detailUrl
     )
 
