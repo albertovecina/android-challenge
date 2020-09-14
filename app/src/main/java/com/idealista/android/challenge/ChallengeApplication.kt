@@ -10,6 +10,7 @@ class ChallengeApplication : Application() {
         super.onCreate()
         Addressable.PACKAGE_NAME = packageName
         CoreAssembler.stringsProvider = StringsProvider(baseContext)
+        CoreAssembler.preferencesProvider = PreferencesProvider(baseContext)
     }
 
 }

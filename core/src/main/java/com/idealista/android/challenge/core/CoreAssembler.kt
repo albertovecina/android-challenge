@@ -11,6 +11,8 @@ object CoreAssembler {
 
     lateinit var stringsProvider: StringsProvider
 
+    lateinit var preferencesProvider: PreferencesProvider
+
     private val apiClient: ApiClient by lazy {
         ApiClient.Builder()
             .withEndPoint("https://run.mocky.io/")
