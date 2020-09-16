@@ -16,7 +16,11 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
         fun onAdClicked(ad: AdModel)
 
-        fun onAdFavouriteButtonClicked(adId: String, isFavourite: Boolean)
+        fun onAdFavouriteButtonClicked(
+            position: Int,
+            adId: String,
+            isFavourite: Boolean
+        )
 
     }
 
@@ -40,9 +44,12 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
             holder.title.text = title
             holder.price.text = price
             holder.favourite.isChecked = isFavourite
-            holder.favourite.setOnCheckedChangeListener { _, isChecked ->
-                isFavourite = isChecked
-                listener.onAdFavouriteButtonClicked(id, isChecked)
+            holder.favourite.setOnClickListener {
+                listener.onAdFavouriteButtonClicked(
+                    holder.adapterPosition,
+                    id,
+                    holder.favourite.isChecked
+                )
             }
         }
     }

@@ -10,6 +10,11 @@ import com.idealista.android.challenge.list.domain.setFavouriteAd
 
 class ListPresenter(private val view: ListView) {
 
+    private lateinit var adsList: ListModel
+    private lateinit var favouriteAdsList: ListModel
+
+    private var isShowingFavourites: Boolean = false
+
     fun onListNeeded() {
         UseCase<CommonError, AdList>()
             .bg(list(ListAssembler.listRepository))
@@ -19,19 +24,38 @@ class ListPresenter(private val view: ListView) {
                     {
 
                     },
-                    { list ->
-                        view.render(list)
+                    { responseAdList ->
+                        adsList = responseAdList
+                        view.render(adsList)
                     }
                 )
             }.run(CoreAssembler.executor)
+    }
+
+    fun onFavouritesListClick() {
+        isShowingFavourites = true
+        favouriteAdsList = ListModel(adsList.ads.filter { ad -> ad.isFavourite }.toMutableList())
+        view.render(favouriteAdsList)
+    }
+
+    fun onFullListClick() {
+        isShowingFavourites = false
+        view.render(adsList)
     }
 
     fun onAdClicked(ad: AdModel) {
         view.navigateToAd(ad.detailUrl)
     }
 
-    fun onAdFavouriteButtonClicked(adId: String, isFavourite: Boolean) {
+    fun onAdFavouriteButtonClicked(position: Int, adId: String, isFavourite: Boolean) {
+        adsList.ads.find { it.id == adId }?.isFavourite = isFavourite
+
         setFavouriteAd(ListAssembler.preferencesRepository, adId, isFavourite)
+
+        if (isShowingFavourites && !isFavourite) {
+            favouriteAdsList.ads.removeAt(position)
+            view.removeAdAtPosition(position)
+        }
     }
 
 }

@@ -3,10 +3,11 @@ package com.idealista.android.challenge.list.ui.list
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.tabs.TabLayout
 import com.idealista.android.challenge.core.Addressable
 import com.idealista.android.challenge.core.intentTo
 import com.idealista.android.challenge.list.R
+import kotlinx.android.synthetic.main.activity_list.*
 
 class ListActivity : AppCompatActivity(),
     ListView {
@@ -16,15 +17,38 @@ class ListActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
+
         ListAssembler.presenter =
             ListPresenter(this)
+
+        initViews()
+
+        ListAssembler.presenter.onListNeeded()
+    }
+
+    private fun initViews() {
         listAdapter = ListAdapter()
-        findViewById<RecyclerView>(R.id.recycler).apply {
+        recycler.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(this@ListActivity)
             adapter = listAdapter
         }
-        ListAssembler.presenter.onListNeeded()
+        tlFilter.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                when (tab?.position) {
+                    0 -> ListAssembler.presenter.onFullListClick()
+                    1 -> ListAssembler.presenter.onFavouritesListClick()
+                }
+            }
+        })
     }
 
     override fun render(list: ListModel) {
@@ -35,10 +59,18 @@ class ListActivity : AppCompatActivity(),
                 ListAssembler.presenter.onAdClicked(ad)
             }
 
-            override fun onAdFavouriteButtonClicked(adId: String, isFavourite: Boolean) {
-                ListAssembler.presenter.onAdFavouriteButtonClicked(adId, isFavourite)
+            override fun onAdFavouriteButtonClicked(
+                position: Int,
+                adId: String,
+                isFavourite: Boolean
+            ) {
+                ListAssembler.presenter.onAdFavouriteButtonClicked(position, adId, isFavourite)
             }
         })
+    }
+
+    override fun removeAdAtPosition(position: Int) {
+        listAdapter.notifyItemRemoved(position)
     }
 
     override fun navigateToAd(url: String) {
