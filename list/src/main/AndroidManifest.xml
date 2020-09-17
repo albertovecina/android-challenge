@@ -12,7 +12,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.ads.AdsActivity" />
+        <activity
+            android:name=".ui.ads.AdsActivity"
+            android:parentActivityName=".ui.list.ListActivity" />
 
     </application>
 
