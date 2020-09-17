@@ -9,6 +9,7 @@ import com.idealista.android.challenge.list.domain.adDetail
 class AdsPresenter(private val view: AdsView) {
 
     fun onAdNeeded(url: String) {
+        view.showProgress()
         UseCase<CommonError, AdDetail>()
             .bg(
                 adDetail(
@@ -20,9 +21,10 @@ class AdsPresenter(private val view: AdsView) {
             .ui {
                 it.fold(
                     {
-
+                        view.hideProgress()
                     },
                     { adDetailModel ->
+                        view.hideProgress()
                         view.render(adDetailModel)
                     }
                 )

@@ -16,17 +16,19 @@ class ListPresenter(private val view: ListView) {
     private var isShowingFavourites: Boolean = false
 
     fun onListNeeded() {
+        view.showProgress()
         UseCase<CommonError, AdList>()
             .bg(list(ListAssembler.listRepository))
             .map { it.toModel { adId -> isFavouriteAd(ListAssembler.preferencesRepository, adId) } }
             .ui {
                 it.fold(
                     {
-
+                        view.hideProgress()
                     },
                     { responseAdList ->
                         adsList = responseAdList
                         view.render(adsList)
+                        view.hideProgress()
                     }
                 )
             }.run(CoreAssembler.executor)

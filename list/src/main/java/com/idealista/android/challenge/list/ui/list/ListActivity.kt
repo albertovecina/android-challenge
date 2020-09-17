@@ -1,6 +1,7 @@
 package com.idealista.android.challenge.list.ui.list
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
@@ -49,6 +50,14 @@ class ListActivity : AppCompatActivity(),
                 }
             }
         })
+    }
+
+    override fun showProgress() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    override fun hideProgress() {
+        progressBar.visibility = View.GONE
     }
 
     override fun render(list: ListModel) {

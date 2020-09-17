@@ -28,6 +28,17 @@
 
     </com.google.android.material.tabs.TabLayout>
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey10"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/colorAccent"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/tlFilter" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
@@ -35,7 +46,7 @@
         android:background="@color/grey10"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tlFilter"
+        app:layout_constraintTop_toBottomOf="@id/progressBar"
         tools:context=".ui.list.ListActivity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

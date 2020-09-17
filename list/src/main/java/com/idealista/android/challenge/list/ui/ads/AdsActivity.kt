@@ -1,6 +1,7 @@
 package com.idealista.android.challenge.list.ui.ads
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.idealista.android.challenge.core.Addressable
 import com.idealista.android.challenge.list.R
@@ -17,6 +18,14 @@ class AdsActivity : AppCompatActivity(),
         AdsAssembler.presenter.onAdNeeded(
             intent.getStringExtra(Addressable.Activity.Ads.EXTRA_URL) ?: ""
         )
+    }
+
+    override fun showProgress() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    override fun hideProgress() {
+        progressBar.visibility = View.GONE
     }
 
     override fun render(model: AdDetailModel) {
