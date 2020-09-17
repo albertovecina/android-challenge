@@ -12,15 +12,32 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/grey10"
+        android:background="@color/white"
         android:indeterminate="true"
         android:indeterminateTint="@color/colorAccent"
         android:visibility="gone" />
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/vpPictures"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_height="wrap_content">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/vpPictures"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+
+        <TextView
+            android:id="@+id/tvPageIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            tools:text="1/3" />
+
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
