@@ -10,8 +10,8 @@ import com.idealista.android.challenge.list.domain.setFavouriteAd
 
 class ListPresenter(private val view: ListView) {
 
-    private lateinit var adsList: ListModel
-    private lateinit var favouriteAdsList: ListModel
+    private var adsList: ListModel = ListModel(arrayListOf())
+    private var favouriteAdsList: ListModel = ListModel(arrayListOf())
 
     private var isShowingFavourites: Boolean = false
 
