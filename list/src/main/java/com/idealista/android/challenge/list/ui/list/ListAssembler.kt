@@ -4,7 +4,6 @@ import com.idealista.android.challenge.core.CoreAssembler
 import com.idealista.android.challenge.list.data.ListDataSource
 import com.idealista.android.challenge.list.data.ListRepository
 import com.idealista.android.challenge.list.data.PreferencesDataSource
-import com.idealista.android.challenge.list.data.PreferencesRepository
 
 object ListAssembler {
 
@@ -18,10 +17,9 @@ object ListAssembler {
 
     lateinit var presenter: ListPresenter
 
-    val listRepository: ListRepository by lazy { ListRepository(listDataSource) }
-
-    val preferencesRepository: PreferencesRepository by lazy {
-        PreferencesRepository(
+    val listRepository: ListRepository by lazy {
+        ListRepository(
+            listDataSource,
             preferencesDataSource
         )
     }

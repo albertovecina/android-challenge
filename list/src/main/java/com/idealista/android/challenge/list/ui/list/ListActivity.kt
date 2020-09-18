@@ -73,13 +73,9 @@ class ListActivity : AppCompatActivity(),
                 adId: String,
                 isFavourite: Boolean
             ) {
-                ListAssembler.presenter.onAdFavouriteButtonClicked(position, adId, isFavourite)
+                ListAssembler.presenter.onAdFavouriteButtonClicked(adId, isFavourite)
             }
         })
-    }
-
-    override fun removeAdAtPosition(position: Int) {
-        listAdapter.notifyItemRemoved(position)
     }
 
     override fun navigateToAd(url: String) {

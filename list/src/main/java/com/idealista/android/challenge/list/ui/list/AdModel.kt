@@ -16,7 +16,7 @@ data class AdModel(
     val detailUrl: String
 )
 
-fun Ad.toModel(isFavourite: Boolean) =
+fun Ad.toModel() =
     AdModel(
         id,
         thumbnail,

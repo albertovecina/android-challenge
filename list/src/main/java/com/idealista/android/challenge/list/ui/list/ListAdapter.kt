@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.idealista.android.challenge.list.R
 import com.squareup.picasso.Picasso
@@ -24,7 +25,7 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
     }
 
-    private var ads: List<AdModel> = emptyList()
+    private var ads: MutableList<AdModel> = ArrayList()
     private lateinit var listener: AdListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -55,8 +56,10 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
     }
 
     fun set(listModel: ListModel) {
-        ads = listModel.ads
-        notifyDataSetChanged()
+        val diffResult = DiffUtil.calculateDiff(ListDiffCallBack(ads, listModel.ads))
+        ads.clear()
+        ads.addAll(listModel.ads)
+        diffResult.dispatchUpdatesTo(this)
     }
 
     fun listener(listener: AdListener) {
@@ -69,6 +72,24 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
         var price: TextView = view.findViewById(R.id.tvPrice)
         var favourite: CheckBox = view.findViewById(R.id.cvFavourite)
         var parent: View = view.findViewById(R.id.parent)
+    }
+
+    class ListDiffCallBack(
+        private val oldList: List<AdModel>,
+        private val newList: List<AdModel>
+    ) : DiffUtil.Callback() {
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+            oldList[oldItemPosition].id == newList[newItemPosition].id
+
+
+        override fun getOldListSize(): Int = oldList.size
+
+        override fun getNewListSize(): Int = newList.size
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+            oldList[oldItemPosition] == newList[newItemPosition]
+
     }
 
 }

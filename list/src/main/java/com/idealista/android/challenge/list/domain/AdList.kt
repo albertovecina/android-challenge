@@ -1,9 +1,10 @@
 package com.idealista.android.challenge.list.domain
 
 import com.idealista.android.challenge.core.model.entity.ListEntity
-import kotlin.collections.List
 
 data class AdList(
-    val ads: List<Ad>)
+    val ads: List<Ad>
+)
 
-fun ListEntity.toDomain() = AdList(elementList.map { it.toDomain() })
+fun ListEntity.toDomain(favouriteAdsMapper: (String?) -> Boolean) =
+    AdList(elementList.map { it.toDomain(favouriteAdsMapper(it.propertyCode)) })
