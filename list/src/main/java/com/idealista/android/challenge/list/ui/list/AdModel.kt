@@ -6,6 +6,7 @@ import com.idealista.android.challenge.core.model.Operation
 import com.idealista.android.challenge.core.model.Typology
 import com.idealista.android.challenge.core.model.string
 import com.idealista.android.challenge.list.domain.Ad
+import java.text.DecimalFormat
 
 data class AdModel(
     val id: String,
@@ -29,7 +30,7 @@ fun Ad.toModel() =
         detailUrl
     )
 
-private fun formatPrice(price: Double) = "$price €"
+private fun formatPrice(price: Double) = "${DecimalFormat("0.##").format(price)} €"
 private fun formatTitle(typology: Typology, operation: Operation) =
     CoreAssembler.stringsProvider.string(
         R.string.typology_at_operation,
