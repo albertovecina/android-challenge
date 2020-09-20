@@ -19,7 +19,7 @@ class ListPresenterUnitTest {
 
     @Test
     fun whenFavouritesTabClickThenRender() {
-        presenter.onFavouritesListClick()
+        presenter.onUpdatedListNeeded()
         verify(view).render(any())
     }
 

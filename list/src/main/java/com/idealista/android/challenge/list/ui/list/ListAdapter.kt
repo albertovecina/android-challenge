@@ -47,11 +47,11 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
             holder.price.text = price
             holder.favourite.isChecked = isFavourite
             holder.favourite.setOnClickListener {
+                isFavourite = holder.favourite.isChecked
                 listener.onAdFavouriteButtonClicked(
                     holder.adapterPosition,
                     id,
-                    holder.favourite.isChecked
-                )
+                    holder.favourite.isChecked)
             }
         }
     }

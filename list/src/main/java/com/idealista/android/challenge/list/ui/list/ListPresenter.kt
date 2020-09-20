@@ -12,7 +12,7 @@ class ListPresenter(private val view: ListView) {
 
     private var adsList: ListModel = ListModel(arrayListOf())
 
-    private var isShowingFavourites: Boolean = false
+    private var isFilteredByFavourites: Boolean = false
 
     fun onListNeeded() {
         view.showProgress()
@@ -33,14 +33,12 @@ class ListPresenter(private val view: ListView) {
             }.run(CoreAssembler.executor)
     }
 
-    fun onFavouritesListClick() {
-        isShowingFavourites = true
-        view.render(ListModel(adsList.ads.filter { it.isFavourite }))
-    }
-
-    fun onFullListClick() {
-        isShowingFavourites = false
-        view.render(adsList)
+    fun onUpdatedListNeeded(filterByFavourites: Boolean) {
+        isFilteredByFavourites = filterByFavourites
+        if(filterByFavourites)
+            view.render(ListModel(adsList.ads.filter { it.isFavourite }))
+        else
+            view.render(adsList)
     }
 
     fun onAdClicked(ad: AdModel) {
@@ -48,8 +46,6 @@ class ListPresenter(private val view: ListView) {
     }
 
     fun onAdFavouriteButtonClicked(adId: String, isFavourite: Boolean) {
-        adsList.ads.find { it.id == adId }?.isFavourite = isFavourite
-
         UseCase<CommonError, Unit>().bg {
             if (isFavourite)
                 setAdAsFavourite(ListAssembler.listRepository, adId)
@@ -57,9 +53,7 @@ class ListPresenter(private val view: ListView) {
                 removeAdAsFavourite(ListAssembler.listRepository, adId)
         }.run(CoreAssembler.executor)
 
-        if (isShowingFavourites && !isFavourite)
-            view.render(ListModel(adsList.ads.filter { it.isFavourite }))
-
+        onUpdatedListNeeded(isFilteredByFavourites)
     }
 
 }

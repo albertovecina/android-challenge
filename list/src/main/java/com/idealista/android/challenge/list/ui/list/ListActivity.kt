@@ -45,8 +45,8 @@ class ListActivity : AppCompatActivity(),
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
-                    0 -> ListAssembler.presenter.onFullListClick()
-                    1 -> ListAssembler.presenter.onFavouritesListClick()
+                    0 -> ListAssembler.presenter.onUpdatedListNeeded(false)
+                    1 -> ListAssembler.presenter.onUpdatedListNeeded(true)
                 }
             }
         })
