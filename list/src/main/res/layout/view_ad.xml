@@ -51,14 +51,13 @@
                 app:layout_constraintTop_toBottomOf="@id/tvTitle"
                 tools:text="450€" />
 
-            <CheckBox
+            <com.idealista.android.challenge.core.view.FavouritesCheck
                 android:id="@+id/cvFavourite"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@drawable/selector_favourites"
-                android:buttonTint="@android:color/holo_red_light"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tvPrice" />
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                app:layout_constraintBottom_toBottomOf="@id/tvPrice"
+                app:layout_constraintEnd_toEndOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>

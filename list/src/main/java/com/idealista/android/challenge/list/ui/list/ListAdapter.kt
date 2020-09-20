@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.idealista.android.challenge.core.view.FavouritesCheck
 import com.idealista.android.challenge.list.R
 import com.squareup.picasso.Picasso
 
@@ -70,7 +71,7 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
         var image: ImageView = view.findViewById(R.id.ivAd)
         var title: TextView = view.findViewById(R.id.tvTitle)
         var price: TextView = view.findViewById(R.id.tvPrice)
-        var favourite: CheckBox = view.findViewById(R.id.cvFavourite)
+        var favourite: FavouritesCheck = view.findViewById(R.id.cvFavourite)
         var parent: View = view.findViewById(R.id.parent)
     }
 
